@@ -1,10 +1,28 @@
+const dotenv = require("dotenv");
+
+if (process.env.NODE_ENV !== "production") {
+  dotenv.config();
+}
+
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Gatsby Contentful Blogsite`,
+    description: `A blogsite with Gatsby, Contentful, Netlify, Firebase and Typescript.`,
+    author: {
+      name: `MianMuhammadSharjeelSafdar`,
+      github: `https://github.com/SharjeelSafdar`,
+    },
+    siteUrl: `https://gatsby-blog-p12a.netlify.app/`,
   },
   plugins: [
+    {
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: process.env.CONTENTFUL_SPACE_ID,
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+      },
+    },
+    `gatsby-plugin-material-ui`,
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -18,8 +36,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `Gatsby Contentful Blogsite`,
+        short_name: `Gatsby Blog`,
         start_url: `/`,
         background_color: `#663399`,
         theme_color: `#663399`,
@@ -31,4 +49,4 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
   ],
-}
+};
