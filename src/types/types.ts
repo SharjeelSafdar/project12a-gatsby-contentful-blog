@@ -1,16 +1,14 @@
-export type PostType = {
+import { FluidObject } from "gatsby-image";
+
+export type BlogPostType = {
   slug: string;
   title: string;
   publishDate: string;
   excerpt: { raw: string };
-  featuredImage: { fluid: GatsbyContentfulFluidType };
-  content?: { raw: string };
-};
-
-export type GatsbyContentfulFluidType = {
-  aspectRatio: number;
-  base64: string;
-  sizes: string;
-  src: string;
-  srcSet: string;
+  featuredImage: { fluid: FluidObject };
+  content?: {
+    raw: string;
+    references: { fluid: FluidObject }[];
+  };
+  author?: string;
 };

@@ -1,15 +1,16 @@
 import React, { FC } from "react";
-import { graphql, useStaticQuery, Link } from "gatsby";
+import { graphql, useStaticQuery, Link, PageProps } from "gatsby";
 import { Typography } from "@material-ui/core";
 
 import Layout from "../../components/layout";
 import SEO from "../../components/seo";
 import BlogPostListItem from "../../components/blogPostListItem";
+import PathWithLinks from "../../components/pathWithLinks";
 import { useStyles } from "./styles";
-import { PostType } from "../../types/types";
+import { BlogPostType } from "../../types/types";
 
-const Blog: FC = () => {
-  const data: AllBlogsQueryResponse = useStaticQuery(ALL_BLOGS_QUERY);
+const Blog: FC<PageProps> = ({ location }) => {
+  const data = useStaticQuery<AllBlogsQueryResponse>(ALL_BLOGS_QUERY);
   const classes = useStyles();
 
   return (
@@ -18,6 +19,7 @@ const Blog: FC = () => {
         title={"All Blogs"}
         description={"All blog posts published on the site."}
       />
+      <PathWithLinks path={location.pathname} />
       <Typography variant="h4" component="h1">
         All Blogs
       </Typography>
@@ -71,6 +73,6 @@ const ALL_BLOGS_QUERY = graphql`
 type AllBlogsQueryResponse = {
   allContentfulBlogPost: {
     totalCount: number;
-    edges: { node: PostType }[];
+    edges: { node: BlogPostType }[];
   };
 };

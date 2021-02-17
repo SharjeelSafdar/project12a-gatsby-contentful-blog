@@ -3,11 +3,11 @@ import Img from "gatsby-image";
 import { Typography } from "@material-ui/core";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
-import { PostType } from "../../types/types";
+import { BlogPostType } from "../../types/types";
 import { useStyles } from "./styles";
 
 interface BlogPostProps {
-  post: PostType;
+  post: BlogPostType;
 }
 
 const BlogPost: FC<BlogPostProps> = ({ post }) => {
