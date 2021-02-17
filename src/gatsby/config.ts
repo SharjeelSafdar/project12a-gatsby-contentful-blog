@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+import { GatsbyConfig } from "gatsby";
 
 if (process.env.NODE_ENV !== "production") {
   dotenv.config();
@@ -20,6 +21,7 @@ export default {
       options: {
         spaceId: process.env.CONTENTFUL_SPACE_ID,
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+        forceFullSync: true,
       },
     },
     `gatsby-plugin-material-ui`,
@@ -49,4 +51,4 @@ export default {
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
   ],
-};
+} as GatsbyConfig;
