@@ -20,12 +20,7 @@ jobs:
 
       - name: Install NodeJS
         uses: actions/setup-node@v2
-        with:
-          node-version: "14.15.0"
-
-      # - name: Install Yarn and Project Dependencies
-      #   uses: borales/actions-yarn@v2.0.0
-      #   with: { cmd: install --ignore-engines }
+        with: { node-version: "14.15.0" }
 
       - name: Install Dependencies
         uses: jaid/action-npm-install@v1.2.1
