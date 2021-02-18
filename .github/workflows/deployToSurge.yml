@@ -20,19 +20,21 @@ jobs:
 
       - name: Install NodeJS
         uses: actions/setup-node@v2
-        with: { node-version: 14.15.0 }
+        with:
+          node-version: "14.15.0"
 
-      - run: sudo apt-get install libtool automake autoconf nasm
+      # - name: Install Yarn and Project Dependencies
+      #   uses: borales/actions-yarn@v2.0.0
+      #   with: { cmd: install --ignore-engines }
 
-      - name: Install Yarn and Project Dependencies
-        uses: borales/actions-yarn@v2.0.0
-        with: { cmd: install --ignore-engines }
+      - name: Install Dependencies
+        uses: jaid/action-npm-install@v1.2.1
 
       - name: Run Type Checking and Build Gatsby App
-        run: yarn build
+        run: npm run build
 
       - name: Install Surge
-        run: yarn global add surge
+        run: npm i -g surge
 
       - name: Deploy to Surge
         run: surge ./public --token ${{ secrets.SURGE_TOKEN }}
