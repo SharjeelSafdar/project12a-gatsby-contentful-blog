@@ -1,4 +1,4 @@
-name: Deploy Project 6- Quiz App
+name: Deploy Project 12A- Gatsby Contentful Blogsite
 
 # Controls when the action will run. Triggers the workflow on push event
 # but only for the master branch
@@ -24,7 +24,7 @@ jobs:
 
       - name: Install Yarn and Project Dependencies
         uses: borales/actions-yarn@v2.0.0
-        with: { cmd: install }
+        with: { cmd: install --ignore-engines }
 
       - name: Run Type Checking and Build Gatsby App
         run: yarn build
