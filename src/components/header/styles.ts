@@ -15,7 +15,7 @@ export const useStyles = makeStyles(theme =>
     },
     heading: {
       margin: theme.spacing("auto", 0),
-      fontSize: "2rem",
+      fontSize: "1.75rem",
     },
     link: {
       textDecoration: "none",
@@ -25,11 +25,12 @@ export const useStyles = makeStyles(theme =>
       listStyle: "none",
       margin: theme.spacing("auto", 0),
       padding: 0,
+      marginRight: "-0.6rem",
     },
     button: {
       backgroundColor: "transparent",
       color: theme.palette.common.white,
-      marginLeft: theme.spacing(1),
+      marginLeft: 1,
     },
   })
 );
