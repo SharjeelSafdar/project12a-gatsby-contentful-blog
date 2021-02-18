@@ -19,6 +19,8 @@ jobs:
       - name: Check the Repository
         uses: actions/checkout@v2
 
+      - run: env
+
       - name: Install NodeJS
         uses: actions/setup-node@v2
         with: { node-version: "14.15.0" }
