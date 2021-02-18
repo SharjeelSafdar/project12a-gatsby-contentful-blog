@@ -19,7 +19,7 @@ jobs:
       - name: Check the Repository
         uses: actions/checkout@v2
 
-      - run: env
+      - run: echo process.env.GITHUB_ACTOR
 
       - name: Install NodeJS
         uses: actions/setup-node@v2
