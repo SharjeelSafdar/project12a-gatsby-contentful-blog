@@ -7,7 +7,7 @@ if (process.env.NODE_ENV !== "production") {
 
 export default {
   siteMetadata: {
-    title: `Gatsby Contentful Blogsite`,
+    title: `Blogsite`,
     description: `A blogsite with Gatsby, Contentful, Netlify, Firebase and Typescript.`,
     author: {
       name: `MianMuhammadSharjeelSafdar`,
