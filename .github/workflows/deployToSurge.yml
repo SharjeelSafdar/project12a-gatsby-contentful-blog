@@ -1,0 +1,36 @@
+name: Deploy Project 6- Quiz App
+
+# Controls when the action will run. Triggers the workflow on push event
+# but only for the master branch
+on:
+  push:
+    branch: [master]
+
+jobs:
+  # This workflow builds the react app on a Ubuntu VM and deploys it to surge.
+  DeployApp:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Check the Repository
+        uses: actions/checkout@v2
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v2-beta
+        with: { node-version: 12 }
+
+      - name: Install Yarn and Project Dependencies
+        uses: borales/actions-yarn@v2.0.0
+        with: { cmd: install }
+
+      - name: Run Type Checking and Build Gatsby App
+        run: yarn build
+
+      - name: Install Surge
+        run: yarn global add surge
+
+      - name: Deploy to Surge
+        run: surge ./public --token ${{ secrets.SURGE_TOKEN }}
