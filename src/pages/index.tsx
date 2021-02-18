@@ -9,7 +9,7 @@ const IndexPage: FC = () => (
   <Layout>
     <SEO title="Home" />
     <h1>Hi people</h1>
-    <p>Welcome to our Gatsby blog site.</p>
+    <p>Welcome to our blogsite with Gatsby and Contentful.</p>
     <Link to="/blog">
       <p>Visit our blog page.</p>
     </Link>
