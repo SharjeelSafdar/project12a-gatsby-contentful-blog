@@ -4,6 +4,7 @@ name: Deploy Project 12A- Gatsby Contentful Blogsite
 # but only for the master branch
 on:
   - repository_dispatch
+  - push: { branch: [master] }
 
 jobs:
   # This workflow builds the react app on a Ubuntu VM and deploys it to surge.
