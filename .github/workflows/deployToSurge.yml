@@ -36,4 +36,4 @@ jobs:
         run: npm i -g surge
 
       - name: Deploy to Surge
-        run: surge ./public --token ${{ secrets.SURGE_TOKEN }}
+        run: surge ./public https://gatsby-contentful-blog-p12a.surge.sh --token ${{ secrets.SURGE_TOKEN }}
