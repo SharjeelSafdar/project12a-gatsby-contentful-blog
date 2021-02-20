@@ -11,6 +11,11 @@ interface PathWithLinksProps {
 const PathWithLinks: FC<PathWithLinksProps> = ({ path }) => {
   const classes = useStyles();
 
+  // Remove trailing "/" except for home directory
+  if (path.length > 1 && path.endsWith("/")) {
+    path = path.slice(0, -1);
+  }
+
   const slugs = path.split("/");
   let links = slugs.map((_, index) => slugs.slice(0, index + 1).join("/"));
   links[0] = "/";
