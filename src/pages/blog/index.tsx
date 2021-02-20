@@ -1,13 +1,25 @@
 import React, { FC } from "react";
 import { graphql, useStaticQuery, Link, PageProps } from "gatsby";
-import { Typography } from "@material-ui/core";
+import { makeStyles, createStyles, Typography } from "@material-ui/core";
 
 import Layout from "../../components/layout";
 import SEO from "../../components/seo";
 import BlogPostListItem from "../../components/blogPostListItem";
 import PathWithLinks from "../../components/pathWithLinks";
-import { useStyles } from "./styles";
 import { BlogPostType } from "../../types/types";
+
+const useStyles = makeStyles(theme =>
+  createStyles({
+    list: {
+      listStyle: "none",
+      marginLeft: 0,
+    },
+    link: {
+      textDecoration: "none",
+      color: theme.palette.common.black,
+    },
+  })
+);
 
 const Blog: FC<PageProps> = ({ location }) => {
   const data = useStaticQuery<AllBlogsQueryResponse>(ALL_BLOGS_QUERY);
