@@ -1,7 +1,12 @@
 name: Deploy Project 12A- Gatsby Contentful Blogsite
+env:
+  owner: SharjeelSafdar
+  repo: project12a-gatsby-contentful-blog
 
-# Controls when the action will run. Triggers the workflow on push event
-# but only for the master branch
+# Controls when the action will run. Triggers the workflow on
+# 1) push event for master branch
+# 2) repository_dispatch event from a remote server,
+#    in our case from Contentful webhook.
 on:
   push:
     branch: [master]
@@ -12,12 +17,11 @@ jobs:
   DeployApp:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    environment: Production
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Check the Repository
+      - name: Checkout the Repository
         uses: actions/checkout@v2
 
       - name: Install NodeJS
