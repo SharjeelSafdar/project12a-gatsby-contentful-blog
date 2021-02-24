@@ -1,6 +1,8 @@
 import dotenv from "dotenv";
 import { GatsbyConfig } from "gatsby";
 
+import { firebaseAppConfig } from "../firebase/firebaseAppConfig";
+
 if (process.env.NODE_ENV !== "production") {
   dotenv.config();
 }
@@ -25,6 +27,14 @@ export default {
       },
     },
     `gatsby-plugin-material-ui`,
+    {
+      resolve: `gatsby-plugin-firebase`,
+      options: {
+        credentials: {
+          ...firebaseAppConfig,
+        },
+      },
+    },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
