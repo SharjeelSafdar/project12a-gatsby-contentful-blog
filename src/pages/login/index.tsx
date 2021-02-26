@@ -18,7 +18,6 @@ const LogIn: FC = () => {
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
       firebase.auth.FacebookAuthProvider.PROVIDER_ID,
       firebase.auth.GithubAuthProvider.PROVIDER_ID,
-      // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
     ],
   };
 
@@ -35,7 +34,10 @@ const LogIn: FC = () => {
         <Typography variant="h5" component="h2" align="center">
           Sign In/Up
         </Typography>
-        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth} />
+        <StyledFirebaseAuth
+          uiConfig={uiConfig}
+          firebaseAuth={firebase.auth()}
+        />
       </div>
     </Layout>
   );
