@@ -35,10 +35,7 @@ const LogIn: FC = () => {
         <Typography variant="h5" component="h2" align="center">
           Sign In/Up
         </Typography>
-        <StyledFirebaseAuth
-          uiConfig={uiConfig}
-          firebaseAuth={firebase.auth()}
-        />
+        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth} />
       </div>
     </Layout>
   );
