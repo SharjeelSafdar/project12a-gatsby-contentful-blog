@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { PageProps, graphql, Link } from "gatsby";
 import Img from "gatsby-image";
-import { Box, Typography } from "@material-ui/core";
+import { Box, Button, Typography } from "@material-ui/core";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { BLOCKS } from "@contentful/rich-text-types";
 
@@ -10,6 +10,7 @@ import SEO from "../../components/seo";
 import { BlogPostType } from "../../types/types";
 import PathWithLinks from "../../components/pathWithLinks";
 import { useStyles } from "./styles";
+import { useAuth } from "../../context/authContext";
 
 const BlogPost: FC<PageProps<QueryResponse, ContextType>> = ({
   pageContext: { previous, next },
@@ -17,8 +18,18 @@ const BlogPost: FC<PageProps<QueryResponse, ContextType>> = ({
   location,
 }) => {
   const classes = useStyles();
+  const { isSignedIn } = useAuth();
+
   const post = data.contentfulBlogPost;
   let imageNum = 0;
+  const previousNumReadPosts = localStorage.getItem("numReadPosts");
+  localStorage.setItem(
+    "numReadPosts",
+    previousNumReadPosts ? (+previousNumReadPosts + 1).toString() : "1"
+  );
+
+  const allowReading = () =>
+    isSignedIn || previousNumReadPosts === null || +previousNumReadPosts < 3;
 
   return (
     <Layout>
@@ -40,18 +51,34 @@ const BlogPost: FC<PageProps<QueryResponse, ContextType>> = ({
           {`by ${post.author}`}
         </Typography>
       </Box>
-      {post.content &&
-        documentToReactComponents(JSON.parse(post.content?.raw), {
-          renderNode: {
-            [BLOCKS.EMBEDDED_ASSET]: _ => {
-              if (post.content?.references[imageNum].fluid) {
-                return (
-                  <Img fluid={post.content?.references[imageNum++].fluid} />
-                );
-              }
+      <Typography className={allowReading() ? undefined : classes.text}>
+        {post.content &&
+          documentToReactComponents(JSON.parse(post.content?.raw), {
+            renderNode: {
+              [BLOCKS.EMBEDDED_ASSET]: _ => {
+                if (post.content?.references[imageNum].fluid) {
+                  return (
+                    <Img fluid={post.content?.references[imageNum++].fluid} />
+                  );
+                }
+              },
             },
-          },
-        })}
+          })}
+      </Typography>
+      {!allowReading() && (
+        <Box marginTop={4} marginBottom={4} className={classes.signInBox}>
+          <Typography align="center">Sign in to Continue Reading</Typography>
+          <Button
+            color="primary"
+            variant="contained"
+            className={classes.signInBtn}
+          >
+            <Link to="/signin" className={classes.link}>
+              Sign In
+            </Link>
+          </Button>
+        </Box>
+      )}
       <nav>
         <ul className={classes.list}>
           <li>
@@ -81,7 +108,7 @@ export const BLOG_POST_QUERY = graphql`
     contentfulBlogPost(slug: { eq: $slug }) {
       slug
       title
-      publishDate(formatString: "MMMM DD YYYY")
+      publishDate(formatString: "MMMM DD, YYYY")
       excerpt {
         raw
       }

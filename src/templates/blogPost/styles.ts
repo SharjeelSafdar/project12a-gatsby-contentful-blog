@@ -10,5 +10,26 @@ export const useStyles = makeStyles(theme =>
       padding: 0,
       margin: theme.spacing(2, 0),
     },
+    text: {
+      display: "-webkit-box",
+      "-webkit-line-clamp": "10",
+      "-webkit-box-orient": "vertical",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+    },
+    signInBox: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      marginTop: theme.spacing(8),
+      marginBottom: theme.spacing(8),
+    },
+    signInBtn: {
+      margin: theme.spacing(2, "auto"),
+    },
+    link: {
+      textDecoration: "none",
+      color: theme.palette.common.white,
+    },
   })
 );
