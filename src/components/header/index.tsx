@@ -11,7 +11,7 @@ interface HeaderProps {
 
 const Header: FC<HeaderProps> = ({ siteTitle }) => {
   const classes = useStyles();
-  const { isSignedIn, logOut } = useAuth();
+  const { isSignedIn, signOut } = useAuth();
 
   return (
     <header className={classes.container}>
@@ -29,12 +29,12 @@ const Header: FC<HeaderProps> = ({ siteTitle }) => {
             <Button className={classes.button}>Blog</Button>
           </Link>
           {isSignedIn ? (
-            <Button className={classes.button} onClick={logOut}>
-              Log Out
+            <Button className={classes.button} onClick={signOut}>
+              Sign Out
             </Button>
           ) : (
-            <Link to="/login" className={classes.link}>
-              <Button className={classes.button}>Login</Button>
+            <Link to="/signin" className={classes.link}>
+              <Button className={classes.button}>Sign In</Button>
             </Link>
           )}
         </ul>
