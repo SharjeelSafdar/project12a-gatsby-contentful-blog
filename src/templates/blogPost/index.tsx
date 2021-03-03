@@ -22,14 +22,14 @@ const BlogPost: FC<PageProps<QueryResponse, ContextType>> = ({
 
   const post = data.contentfulBlogPost;
   let imageNum = 0;
-  const previousNumReadPosts = localStorage.getItem("numReadPosts");
-  localStorage.setItem(
-    "numReadPosts",
-    previousNumReadPosts ? (+previousNumReadPosts + 1).toString() : "1"
-  );
+  let previousNumReadPosts = 0;
+  if (typeof window !== `undefined`) {
+    const temp = window.localStorage.getItem("numReadPosts");
+    previousNumReadPosts = temp ? Number(temp) : 0;
+    localStorage.setItem("numReadPosts", (previousNumReadPosts + 1).toString());
+  }
 
-  const allowReading = () =>
-    isSignedIn || previousNumReadPosts === null || +previousNumReadPosts < 3;
+  const allowReading = () => isSignedIn || previousNumReadPosts < 3;
 
   return (
     <Layout>
