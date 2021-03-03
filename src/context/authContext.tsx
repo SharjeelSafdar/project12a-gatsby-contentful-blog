@@ -45,6 +45,15 @@ export const AuthProvider: FC = ({ children }) => {
   const [formType, setFormType] = useState<FormTypes>("SIGN_IN");
 
   useEffect(() => {
+    // Check for any response from a sign in redirect.
+    firebase
+      .auth()
+      .getRedirectResult()
+      .then(result => {
+        if (result.user) {
+          navigate("/");
+        }
+      });
     const unsubscriber = firebase.auth().onAuthStateChanged(user => {
       setIsSignedIn(!!user);
       setUserNameOrEmail(user && (user.displayName || user.email));
