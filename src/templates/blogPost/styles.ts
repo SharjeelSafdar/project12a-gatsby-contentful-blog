@@ -12,7 +12,7 @@ export const useStyles = makeStyles(theme =>
     },
     text: {
       display: "-webkit-box",
-      "-webkit-line-clamp": "10",
+      "-webkit-line-clamp": "5",
       "-webkit-box-orient": "vertical",
       overflow: "hidden",
       textOverflow: "ellipsis",
