@@ -89,7 +89,7 @@ export const AuthProvider: FC = ({ children }) => {
         (providerType === "GITHUB" && new firebase.auth.GithubAuthProvider());
 
       if (authProvider) {
-        const result = await firebase.auth().signInWithPopup(authProvider);
+        const result = await firebase.auth().signInWithRedirect(authProvider);
         console.log("Success: ", result);
         console.log({ error: false, message: "Successfully, signed up." });
         navigate("/");
