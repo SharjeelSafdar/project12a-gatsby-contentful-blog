@@ -9,7 +9,6 @@ import firebase from "gatsby-plugin-firebase";
 import { navigate } from "gatsby";
 
 type FormTypes = "SIGN_IN" | "SIGN_UP";
-type ProviderType = "GOOGLE" | "FACEBOOK" | "GITHUB";
 
 type ContextType = {
   isSignedIn: boolean;
@@ -20,7 +19,6 @@ type ContextType = {
   signUp: (email: string, password: string) => void;
   signIn: (email: string, password: string) => void;
   signOut: () => void;
-  signInWithAuthProvider: (providerType: ProviderType) => void;
 };
 
 const initialValue: ContextType = {
@@ -32,7 +30,6 @@ const initialValue: ContextType = {
   signUp: () => {},
   signIn: () => {},
   signOut: () => {},
-  signInWithAuthProvider: () => {},
 };
 
 export const AuthContext = createContext<ContextType>(initialValue);
@@ -80,26 +77,6 @@ export const AuthProvider: FC = ({ children }) => {
     navigate("/signin");
   };
 
-  const signInWithAuthProvider = async (providerType: ProviderType) => {
-    try {
-      const authProvider =
-        (providerType === "GOOGLE" && new firebase.auth.GoogleAuthProvider()) ||
-        (providerType === "FACEBOOK" &&
-          new firebase.auth.FacebookAuthProvider()) ||
-        (providerType === "GITHUB" && new firebase.auth.GithubAuthProvider());
-
-      if (authProvider) {
-        await firebase.auth().signInWithPopup(authProvider);
-        console.log({ error: false, message: "Successfully, signed up." });
-        navigate("/");
-      } else {
-        throw new Error("Given auth provider is not supported or is invalid.");
-      }
-    } catch (err) {
-      console.log({ error: true, message: err.message });
-    }
-  };
-
   const value: ContextType = {
     ...initialValue,
     isSignedIn,
@@ -110,7 +87,6 @@ export const AuthProvider: FC = ({ children }) => {
     signUp,
     signIn,
     signOut,
-    signInWithAuthProvider,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

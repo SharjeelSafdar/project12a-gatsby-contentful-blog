@@ -10,7 +10,6 @@ import { useAuth } from "../../context/authContext";
 import Layout from "../../components/layout";
 import SEO from "../../components/seo";
 import EmailSignIn from "../../components/emailSignIn";
-import FedratedAuthSignIn from "../../components/fedratedAuthSignIn";
 import ChangeFormType from "../../components/changeFormType";
 
 const useStyles = makeStyles(theme =>
@@ -56,7 +55,6 @@ const SignIn: FC = () => {
           {isSignInForm() ? "Sign In" : "Sign Up"}
         </Typography>
         <EmailSignIn />
-        <FedratedAuthSignIn />
         <ChangeFormType />
       </Container>
     </Layout>
